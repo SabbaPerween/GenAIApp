@@ -7,19 +7,20 @@ import streamlit as st
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-##LangSmith Tracking 
-os.environ["LANGCHAIN_API_KEY"]=os.getenv("LANGCHAIN_API_KEY")
-os.environ["LANGCHAIN_PROJECT"]=os.getenv("LANGCHAIN_PROJECT")
-os.environ["LANGCHAIN_TRACING_V2"]="true"
-# langchain_api_key = os.getenv("LANGCHAIN_API_KEY")
-# langchain_project = os.getenv("LANGCHAIN_PROJECT")
+# ##LangSmith Tracking 
+# os.environ["LANGCHAIN_API_KEY"]=os.getenv("LANGCHAIN_API_KEY")
+# os.environ["LANGCHAIN_PROJECT"]=os.getenv("LANGCHAIN_PROJECT")
+# os.environ["LANGCHAIN_TRACING_V2"]="true"
+# Instead of directly setting environment variables
+langchain_api_key = os.getenv("LANGCHAIN_API_KEY")
+langchain_project = os.getenv("LANGCHAIN_PROJECT")
 
-# if langchain_api_key:
-#     os.environ["LANGCHAIN_API_KEY"] = langchain_api_key
-# if langchain_project:
-#     os.environ["LANGCHAIN_PROJECT"] = langchain_project
+if langchain_api_key:
+    os.environ["LANGCHAIN_API_KEY"] = langchain_api_key
+if langchain_project:
+    os.environ["LANGCHAIN_PROJECT"] = langchain_project
 
-# os.environ["LANGCHAIN_TRACING_V2"] = "true" 
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
 
 ##Prompt Template
 prompt=ChatPromptTemplate.from_messages(
