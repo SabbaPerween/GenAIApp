@@ -35,26 +35,10 @@ st.title("Langchain Demo With LLAMA2")
 input_text=st.text_input("What question you have in mind?")
 
 ##Call ollama llama2 model
-llm=Ollama(model="llama2")
+llm = Ollama(model="llama2", base_url="http://localhost:11434")
 output_parser=StrOutputParser()
 chain=prompt|llm|output_parser
 
 if input_text:
     st.write(chain.invoke({"question":input_text}))
 
-
-import subprocess
-import time
-import platform
-
-def start_ollama():
-    system = platform.system()
-    if system == "Windows":
-        # Windows
-        subprocess.Popen(["ollama", "serve"], creationflags=subprocess.CREATE_NO_WINDOW)
-    else:
-        # macOS/Linux
-        subprocess.Popen(["ollama", "serve"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    
-    # Wait for Ollama to initialize
-    time.sleep(5)
