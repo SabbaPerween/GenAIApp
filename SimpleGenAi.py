@@ -43,3 +43,18 @@ if input_text:
     st.write(chain.invoke({"question":input_text}))
 
 
+import subprocess
+import time
+import platform
+
+def start_ollama():
+    system = platform.system()
+    if system == "Windows":
+        # Windows
+        subprocess.Popen(["ollama", "serve"], creationflags=subprocess.CREATE_NO_WINDOW)
+    else:
+        # macOS/Linux
+        subprocess.Popen(["ollama", "serve"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    
+    # Wait for Ollama to initialize
+    time.sleep(5)
